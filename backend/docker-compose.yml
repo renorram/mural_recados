@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  php:
+    build: .docker/php
+    volumes:
+      - .:/usr/app
+  nginx:
+    build: .docker/nginx
+    volumes:
+      - .:/usr/app
+    ports:
+      - "8080:80"
+  db:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_PASSWORD=rootqwe123
+      - POSTGRES_DB=message_board_db
+    volumes:
+      - .docker/postgres/data:/var/lib/postgresql/data
